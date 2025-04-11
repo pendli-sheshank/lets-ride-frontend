@@ -1,15 +1,24 @@
 // src/components/Layout/Navbar.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+// Adjust the relative path to go up from 'Layout' and into 'styles'
+import styles from '../../styles/components/Navbar.module.css';
 
 const Navbar = () => {
+  const getNavLinkClass = ({ isActive }) => {
+    return isActive ? `${styles.navLink} ${styles.activeNavLink}` : styles.navLink;
+  };
+
   return (
-    <nav style={{ padding: '10px', borderBottom: '1px solid #eee', marginBottom: '20px' }}>
-      <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
-      <Link to="/login" style={{ marginRight: '10px' }}>Login</Link>
-      <Link to="/register" style={{ marginRight: '10px' }}>Register</Link>
-      <Link to="/dashboard" style={{ marginRight: '10px' }}>Dashboard</Link>
-      {/* Add other links like Post Ride, Browse Rides later */}
+    <nav className={styles.navbar}>
+     <NavLink to="/" className={styles.logo}> {/* Use styles.logo */}
+        Let's Ride
+      </NavLink>
+      <NavLink to="/" className={getNavLinkClass}>Home</NavLink>
+      <NavLink to="/dashboard" className={getNavLinkClass}>Dashboard</NavLink>
+      {/* Add conditional links based on login status later */}
+      <NavLink to="/login" className={getNavLinkClass}>Login</NavLink>
+      <NavLink to="/register" className={getNavLinkClass}>Register</NavLink>           
     </nav>
   );
 };
